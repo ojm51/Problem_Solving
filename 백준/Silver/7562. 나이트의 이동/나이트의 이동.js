@@ -24,8 +24,9 @@ for(let t = 0; t < T; t++) {
   dist[sx][sy] = 0;
   queue.push([sx, sy]);
   
+  let found = false;
   let head = 0;
-  while(head < queue.length) {
+  while(head < queue.length && !found) {
     const [x, y] = queue[head++];
     
     for(let [dx, dy] of directions) {
@@ -36,6 +37,12 @@ for(let t = 0; t < T; t++) {
       if(dist[nx][ny] !== -1) continue;
       
       dist[nx][ny] = dist[x][y] + 1;
+      
+      if(nx === ex && ny === ey) {
+        found = true;
+        break;
+      }
+      
       queue.push([nx, ny]);
     }
   }
