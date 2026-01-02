@@ -3,25 +3,34 @@ const [N, M] = input[0].split(' ').map(Number);
 
 const edges = Array.from({ length: N + 1 }, () => []);
 input.slice(1).map(line => {
-  const [u, v] = line.split(' ');
+  const [u, v] = line.split(' ').map(Number);
   edges[u].push(v);
   edges[v].push(u);
 });
 
 const visited = Array(N + 1).fill(false);
 
-const dfs = (node) => {
-  visited[node] = true;
+const bfs = (start) => {
+  const queue = [start];
+  let head = 0;
   
-  for(let nextNode of edges[node]) {
-    if(!visited[nextNode]) dfs(nextNode);
+  while(head < queue.length) {
+    const node = queue[head++];
+    visited[node] = true;
+    
+    for(let next of edges[node]) {
+      if(!visited[next]) {
+        visited[next] = true;
+        queue.push(next);
+      }
+    }
   }
-};
+}
 
 let count = 0;
-for(let i = 1; i < N + 1; i++) {
+for(let i = 1; i <= N; i++) {
   if(!visited[i]) {
-    dfs(i);
+    bfs(i);
     count++;
   }
 }
