@@ -9,18 +9,19 @@ input.slice(1).forEach(line => {
 });
 
 const visited = Array(N + 1).fill(false);
-const queue = [...edges[1]];
-let head = 0;
-
 const answer = Array(N + 1).fill(0);
-queue.forEach(n => answer[n] = 1);
 
+const queue = [1];
+visited[1] = true;
+
+let head = 0;
 while(head < queue.length) {
   const node = queue[head++];
-  visited[node] = true;
   
   for(let next of edges[node]) {
     if(visited[next]) continue;
+    
+    visited[node] = true;
     answer[next] = node;
     queue.push(next);
   }
