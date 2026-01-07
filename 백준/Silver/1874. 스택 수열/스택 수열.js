@@ -3,23 +3,16 @@ const N = Number(input[0]);
 const sequence = input.slice(1).map(Number);
 
 const answer = [];
-
 const stack = [];
-let seqHead = 0;
-let isPossible = true;
 
+let seqHead = 0;
 for(let pushNum = 1; pushNum <= N; pushNum++) {
   stack.push(pushNum);
   answer.push('+');
   
-  while(seqHead < N) {
+  while(stack.length) {
     const target = sequence[seqHead];
     const stackTop = stack[stack.length - 1];
-    
-    if(target < stackTop) {
-      isPossible = false;
-      break;
-    }
     
     if(target !== stackTop) break;
     
@@ -27,8 +20,6 @@ for(let pushNum = 1; pushNum <= N; pushNum++) {
     answer.push('-');
     seqHead++;
   }
-  
-  if(!isPossible) break;
 }
 
-console.log(isPossible ? answer.join('\n') : 'NO');
+console.log(seqHead !== N ? 'NO' : answer.join('\n'));
