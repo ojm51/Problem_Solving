@@ -9,6 +9,7 @@ let tail = 0;
 
 input.slice(1).forEach(line => {
   const [order, num] = line.split(' ');
+  const isEmpty = head === tail;
   
   switch(order) {
     case 'push':
@@ -22,13 +23,13 @@ input.slice(1).forEach(line => {
       answer.push(tail - head);
       break;
     case 'empty':
-      answer.push(head !== tail ? 0 : 1);
+      answer.push(isEmpty ? 1 : 0);
       break;
     case 'front':
-      answer.push(head !== tail ? queue[head] : -1);
+      answer.push(isEmpty ? -1 : queue[head]);
       break;
     case 'back':
-      answer.push(head !== tail ? queue[tail - 1] : -1);
+      answer.push(isEmpty ? -1 : queue[tail - 1]);
       break;
   }
 });
