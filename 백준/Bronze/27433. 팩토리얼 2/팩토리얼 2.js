@@ -1,9 +1,9 @@
 const input = require("fs").readFileSync('/dev/stdin').toString().trim().split('\n'); 
-const N = Number(input);
+const N = BigInt(input);
 
-const factorial = (num) => {
-  if(num === 0 || num === 1) return 1;
-  return num * factorial(num - 1);
+let answer = 1n;
+for(let i = N; i > 0n; i--) {
+  answer *= i;
 }
 
-console.log(factorial(N));
+console.log(answer.toString());
