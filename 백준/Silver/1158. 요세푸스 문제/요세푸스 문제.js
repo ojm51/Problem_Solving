@@ -8,11 +8,10 @@ for(let i = 1; i <= N; i++) {
 
 const answer = [];
 
-while(queue.length) {
-  for(let i = 0; i < K - 1; i++) {
-    queue.push(queue.shift());
-  }
-  answer.push(queue.shift());
+let idx = 0;
+while(queue.length > 0) {
+  idx = (idx + K - 1) % queue.length;
+  answer.push(queue.splice(idx, 1));
 }
 
 console.log(`<${answer.join(', ')}>`);
