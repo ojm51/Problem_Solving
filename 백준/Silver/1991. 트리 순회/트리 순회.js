@@ -7,37 +7,21 @@ input.slice(1).forEach(line => {
   tree[p] = [l, r];
 });
 
-let preResult = '';
 const preorder = (node) => {
-  if(node === '.') return;
-  
-  preResult += node;
-  preorder(tree[node][0]);
-  preorder(tree[node][1]);
+  if(node === '.') return '';
+  return node + preorder(tree[node][0]) + preorder(tree[node][1]);
 };
 
-let inResult = '';
 const inorder = (node) => {
-  if(node === '.') return;
-  
-  inorder(tree[node][0]);
-  inResult += node;
-  inorder(tree[node][1]);
+  if(node === '.') return '';
+  return inorder(tree[node][0]) + node + inorder(tree[node][1]);
 };
 
-let postResult = '';
 const postorder = (node) => {
-  if(node === '.') return;
-  
-  postorder(tree[node][0]);
-  postorder(tree[node][1]);
-  postResult += node;
+  if(node === '.') return '';
+  return postorder(tree[node][0]) + postorder(tree[node][1]) + node;
 };
 
-preorder('A');
-inorder('A');
-postorder('A');
-
-const answer = [preResult, inResult, postResult];
+const answer = [preorder('A'), inorder('A'), postorder('A')];
 
 console.log(answer.join('\n'));
